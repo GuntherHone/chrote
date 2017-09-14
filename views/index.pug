@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Overview
+  h2 Active Assets
+  table
+    tr
+      th Name
+      th URL
+      th Display Time
+      th
+    each site in sites
+      tr
+        td=site.description
+        td=site.url
+        td=site.time + " sec"
+        td
+          .button-group
+            button Delete
+            button Edit
+

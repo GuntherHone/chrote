@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+header {
+  background-color: teal;
+  display:flex;
+  justify-content: space-between;
+}
+
+header a {
+  text-decoration: none;
+}
+
+header h1 {
+  color: white;
+  padding: 5px 20px;
+  margin: 0;
+}
+
+.main {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.main * {
+  padding: 10px;
+}
+
+.main h2 {
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid lightgray;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+}
