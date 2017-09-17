@@ -16,6 +16,16 @@ block content
         td=site.time + " sec"
         td
           .button-group
-            button Delete
+            form(action="/action/delete/"+site.description method="post")
+              input(type="submit" name="delete" value="Delete")
             button Edit
-
+    tr
+      form(action="/action/add" method="post")
+        td
+          input(type="text" name="description" value="")
+        td
+          input(type="text" name="url" value="http://")
+        td
+          input(type="text" name="time" value="")
+        td
+          input(type="submit" Value="Add")

@@ -1,15 +1,9 @@
-var express = require('express');
-var router = express.Router();
-
-let sites = [
-  { description: "Node", url: "http://nodejs.org", time: 20 },
-  { description: "JS News", url: "https://news.js.org/", time: 20 }
-]
+const express = require('express')
+const router = express.Router()
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Home', sites })
+router.get('/', (req, res, next) => {
+  res.render('index', { title: 'Home', sites: req.app.get('sites') })
 })
 
 module.exports = router
-
