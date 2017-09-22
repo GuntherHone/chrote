@@ -11,14 +11,14 @@ block content
       th
     each site in sites
       tr
-        td=site.description
-        td=site.url
-        td=site.time + " sec"
+        td(data-id=site.id contenteditable="true" onfocus="saveValue(this)" onblur="edit('description',this)")=site.description
+        td(data-id=site.id contenteditable="true" onfocus="saveValue(this)" onblur="edit('url',this)")=site.url
         td
-          .button-group
-            form(action="/action/delete/"+site.description method="post")
-              input(type="submit" name="delete" value="Delete")
-            button Edit
+          span(data-id=site.id contenteditable="true" style="padding-right:0" onfocus="saveValue(this)" onblur="edit('time',this)")=site.time
+          = " seconds"
+        td
+          form(action="/action/delete/"+site.id method="post")
+            input(type="submit" name="delete" value="Delete")
     tr
       form(action="/action/add" method="post")
         td
@@ -29,3 +29,36 @@ block content
           input(type="text" name="time" value="")
         td
           input(type="submit" Value="Add")
+  script.
+    let value
+    function saveValue(el) {
+      value = el.innerHTML
+    }
+    
+    function post(path, params, method) {
+        method = method || "post"; // Set method to post by default if not specified.
+
+        var form = document.createElement("form");
+        form.setAttribute("method", method);
+        form.setAttribute("action", path);
+
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function edit(param,el) {
+      if (value !== el.innerHTML) {
+        post('/action/update', {id:el.dataset.id, param, value:el.innerHTML})
+      }
+    }
