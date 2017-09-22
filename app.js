@@ -4,17 +4,21 @@ const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const chrome = require('./chrome')
 
 const index = require('./routes/index')
 const action = require('./routes/action')
 const about = require('./routes/about')
+
+chrome.connect({ retry: true })
+  .then(() => chrome.load(`file://${__dirname}/blank.html`))
 
 const app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-app.set('sites',[])
+app.set('sites', [])
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
