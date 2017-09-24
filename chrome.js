@@ -4,6 +4,7 @@ let client
 let Page
 let connected = false
 let timer
+let chromeVersion
 
 module.exports = (() => {
     const load = async url => {
@@ -27,6 +28,7 @@ module.exports = (() => {
             console.log('Connecting to Chrome Interface...')
             // connect to endpoint
             client = await CDP()
+            chromeVersion = await CDP.Version()
             Page = client.Page
             // enable events then start!
             await Page.enable()
@@ -43,8 +45,12 @@ module.exports = (() => {
             }
         }
     }
+
+    const getVersion = () => chromeVersion.Browser
+
     return {
         connect,
-        load
+        load,
+        getVersion
     }
 })()
