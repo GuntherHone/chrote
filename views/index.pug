@@ -29,6 +29,15 @@ block content
           input(type="text" name="time" value="")
         td
           input(type="submit" Value="Add")
+  .button-group
+    form(action="/action/previous" method="post")
+      input(type="submit" name="previous" value="Previous")
+    form(action="/action/play" method="post")
+      input(type="submit" name="play" value="Play")
+    form(action="/action/stop" method="post")
+      input(type="submit" name="stop" value="Stop")
+    form(action="/action/next" method="post")
+      input(type="submit" name="next" value="Next")
   script.
     let value
     function saveValue(el) {

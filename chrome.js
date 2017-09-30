@@ -1,27 +1,13 @@
-const CDP = require('chrome-remote-interface');
-
-let client
-let Page
-let connected = false
-let timer
-let chromeVersion
+const CDP = require('chrome-remote-interface')
 
 module.exports = (() => {
-    const load = async url => {
-        try {
-            if (!connected) throw "Not connected!"
-            console.log(`Loading ${url}...`)
-            await Page.navigate({ url })
-            await Page.loadEventFired()
-        } catch (err) {
-            console.log(err)
-        }
-    }
 
-    const delay = ms => {
-        console.log(`Waiting for ${ms / 1000} seconds...`)
-        return new Promise((resolve, reject) => setTimeout(resolve, ms))
-    }
+    let schedule
+    let index = 0
+    let timer
+    let Page
+    let chromeVersion
+    let connected = false
 
     const connect = async (options = { retry: false }) => {
         try {
@@ -46,11 +32,56 @@ module.exports = (() => {
         }
     }
 
+    const load = async url => {
+        try {
+            if (!connected) throw "Not connected!"
+            console.log(`Loading ${url}...`)
+            Page.navigate({ url })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const play = () => {
+        console.log(`Showing index ${index} ${schedule[index].url} for ${schedule[index].time}`)
+        load(schedule[index].url)
+        timer = setTimeout(play, schedule[index].time * 1000)
+        index = (index + 1) % schedule.length
+    }
+
+    const stop = () => {
+        if (timer) clearTimeout(timer)
+        timer = undefined
+    }
+
+    const next = () => {
+        console.log('next')
+        stop()
+        play()
+    }
+
+    const previous = () => {
+        console.log('previous')
+        stop()
+        index = index - 2
+        if (index < 0) index = index + schedule.length
+        play()
+    }
+
+    const setSchedule = sites => { 
+        schedule = sites 
+        index = 0
+    }
+
     const getVersion = () => chromeVersion.Browser
 
     return {
         connect,
-        load,
-        getVersion
+        getVersion,
+        play,
+        stop,
+        next,
+        previous,
+        setSchedule
     }
 })()
