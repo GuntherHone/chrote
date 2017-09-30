@@ -9,6 +9,8 @@ module.exports = (() => {
     let chromeVersion
     let connected = false
 
+    const delay = time => new Promise(resolve => setTimeout(resolve,time))
+
     const connect = async (options = { retry: false }) => {
         try {
             console.log('Connecting to Chrome Interface...')
