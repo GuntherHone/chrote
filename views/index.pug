@@ -1,7 +1,14 @@
 extends layout
 
 block content
-  h1 Overview
+  h1 Control
+  h2 Directly Control the Dashboard display
+  .button-group
+    button#btnprevious Previous
+    button#btnplay Play
+    button#btnstop Stop
+    button#btnnext Next  
+  h1 Schedule
   h2 Active Assets
   table
     tr
@@ -24,50 +31,10 @@ block content
         td
           input(type="text" name="description" value="")
         td
-          input(type="text" name="url" value="http://")
+          input(type="text" name="url" value="http://" style="width:95%")
         td
           input(type="text" name="time" value="")
         td
           input(type="submit" Value="Add")
-  .button-group
-    form(action="/action/previous" method="post")
-      input(type="submit" name="previous" value="Previous")
-    form(action="/action/play" method="post")
-      input(type="submit" name="play" value="Play")
-    form(action="/action/stop" method="post")
-      input(type="submit" name="stop" value="Stop")
-    form(action="/action/next" method="post")
-      input(type="submit" name="next" value="Next")
-  script.
-    let value
-    function saveValue(el) {
-      value = el.innerHTML
-    }
-    
-    function post(path, params, method) {
-        method = method || "post"; // Set method to post by default if not specified.
-
-        var form = document.createElement("form");
-        form.setAttribute("method", method);
-        form.setAttribute("action", path);
-
-        for(var key in params) {
-            if(params.hasOwnProperty(key)) {
-                var hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", params[key]);
-
-                form.appendChild(hiddenField);
-            }
-        }
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    function edit(param,el) {
-      if (value !== el.innerHTML) {
-        post('/action/update', {id:el.dataset.id, param, value:el.innerHTML})
-      }
-    }
+  script(src="/lib/jquery/jquery.min.js")
+  script(src="/javascripts/index.js")

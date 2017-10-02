@@ -1,26 +1,24 @@
 const express = require('express')
 const router = express.Router()
 
-let globalID = 0
-
 router.post('/play', (req,res,next) => {
   req.app.get('chrome').play()
-  res.redirect('/')
+  res.send('PLAYING')
 })
 
 router.post('/stop', (req,res,next) => {
   req.app.get('chrome').stop()
-  res.redirect('/')
+  res.send('STOPPED')
 })
 
 router.post('/next', (req,res,next) => {
   req.app.get('chrome').next()
-  res.redirect('/')
+  res.send('SKIPPED FORWARD')
 })
 
 router.post('/previous', (req,res,next) => {
   req.app.get('chrome').previous()
-  res.redirect('/')
+  res.send('SKIPPED BACK')
 })
 
 router.post('/delete/:id?', (req, res, next) => {

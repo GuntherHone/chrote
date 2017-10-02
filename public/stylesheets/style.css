@@ -25,9 +25,6 @@ header h1 {
 .main {
   width: 80vw;
   margin: 0 auto;
-}
-
-.main * {
   padding: 10px;
 }
 
@@ -47,6 +44,11 @@ table {
 
 th, td {
   border-bottom: 1px solid lightgray;
+  padding:10px;
+}
+
+input[type=text] {
+  padding: 10px;
 }
 
 .button-group {
@@ -54,4 +56,5 @@ th, td {
   flex-direction: row;
   justify-content: space-around;
   padding: 0;
+  margin: 10px;
 }

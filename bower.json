@@ -1,0 +1,25 @@
+{
+  "name": "chrote",
+  "description": "Kiosk Display Server",
+  "main": "app.js",
+  "authors": [
+    "Guenther Hoene <a0406459@ti.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Chrome",
+    "Kiosk"
+  ],
+  "homepage": "https://github.com/GuntherHone/chrote",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
