@@ -42,7 +42,7 @@ router.post('/add/' , (req, res, next) => {
 
 router.post('/update/' , (req, res, next) => {
   req.app.get('sites').find(site => site.id === req.body.id)[req.body.param] = req.body.value
-  res.redirect('/')
+  res.send(`UPDATED`)
 })
 
 module.exports = router
